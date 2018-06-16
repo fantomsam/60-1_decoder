@@ -9,7 +9,7 @@ TESTBENCH=speed_counter
 
 #GHDL CONFIG
 GHDL_CMD = ghdl
-GHDL_FLAGS  = --ieee=synopsys -fexplicit
+GHDL_FLAGS  = --ieee=synopsys -fexplicit --std=08
 
 SIMDIR = simulation
 STOP_TIME = 2000ms
