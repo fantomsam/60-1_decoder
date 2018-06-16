@@ -33,13 +33,11 @@ ifeq ($(strip $(TESTBENCH)),)
 endif
 
 	@mkdir simulation #-p
-	@#docker run --rm -v $(PWD):/work -w /work jimtremblay/ghdl-ubuntu make compile TESTBENCH=${TESTBENCH}
-	@$(GHDL_CMD) -i $(GHDL_FLAGS) $(TESTBENCHPATH) $(FILES)
-	@$(GHDL_CMD) -m $(GHDL_FLAGS) $(TESTBENCHFILE)
-	@#@mv $(TESTBENCHFILE) simulation/$(TESTBENCHFILE)
+	@$(GHDL_CMD) -i $(GHDL_FLAGS) --workdir=simulation --work=work $(TESTBENCHPATH) $(FILES)
+	@$(GHDL_CMD) -m $(GHDL_FLAGS) --workdir=simulation --work=work $(TESTBENCHFILE)
 
 run:
-	@$(GHDL_CMD) -r $(GHDL_FLAGS) $(TESTBENCHFILE) --vcd=$(SIMDIR)/$(TESTBENCHFILE).vcd $(GHDL_SIM_OPT)
+	@$(GHDL_CMD) -r $(GHDL_FLAGS) --workdir=simulation $(TESTBENCHFILE) --vcd=$(SIMDIR)/$(TESTBENCHFILE).vcd $(GHDL_SIM_OPT)
 
 view:
 	@$(WAVEFORM_VIEWER) $(SIMDIR)/$(TESTBENCHFILE).vcd > /dev/null 2>&1 &

@@ -39,7 +39,7 @@ begin
         elsif(s_in_60_1="01") then
           n_counter_fl <= '0';
           p_counter_fl<='1';
-          n_pulse_cnt <= n_pulse_cnt + n_pulse_cnt;
+          n_pulse_cnt <= n_pulse_cnt sll 1;--+ (n_pulse_cnt srl 1);
         else 
         	if(n_counter_fl='1' and p_counter_fl='0') then
 				 		n_pulse_cnt <= n_pulse_cnt + 1;

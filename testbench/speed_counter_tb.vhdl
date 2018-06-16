@@ -54,9 +54,9 @@ architecture behav of speed_counter_tb is
 		    for i in 0 to 2 loop
 				  for j in 0 to 59 loop
 				    in_60_1<= '0';
-				    wait for speed_of_motor / 2.5;
+				    wait for speed_of_motor / 1.5;
 				    in_60_1<= '1';
-				    wait for speed_of_motor / 1.5; 
+				    wait for speed_of_motor / 2.5; 
 				  end loop;
 				  wait for speed_of_motor;
 				end loop;
