@@ -13,15 +13,17 @@ architecture behav of speed_counter_tb is
         rst : in std_logic;
         in_60_1 : in std_logic;
         gap_det : out std_logic;
-        low_speed : out std_logic 
+        low_speed : out std_logic;
+        period_cnt : out std_logic_vector(13 downto 0) 
        );
    end component;
 
    --  Specifies which entity is bound with the component.
    --for adder_0: adder use entity work.adder;
    signal clk, rst, in_60_1, gap_det, low_speed : std_logic;
-   constant clk_in_t : time := 1000 ns;
-   constant speed_of_motor : time := 250 us;
+   signal period_cnt : std_logic_vector(13 downto 0);
+   constant clk_in_t : time := 1 us;
+   constant speed_of_motor : time := 10 ms;
    begin
    --  Component instantiation.
    S_c_0: speed_counter
@@ -30,7 +32,8 @@ architecture behav of speed_counter_tb is
               rst => rst,
               in_60_1 => in_60_1,
               gap_det => gap_det,
-              low_speed => low_speed 
+              low_speed => low_speed,
+              period_cnt => period_cnt
             );
 
    --  This process does the real job.
@@ -54,13 +57,13 @@ architecture behav of speed_counter_tb is
 		    for i in 0 to 2 loop
 				  for j in 0 to 59 loop
 				    in_60_1<= '0';
-				    wait for speed_of_motor / 1.5;
+				    wait for speed_of_motor / 2;
 				    in_60_1<= '1';
-				    wait for speed_of_motor / 2.5; 
+				    wait for speed_of_motor / 2; 
 				  end loop;
 				  wait for speed_of_motor;
 				end loop;
-		  	wait for 120 ms; 
+		  	wait for 20 ms; 
 		  end loop;
       assert false report "end of test" severity note;
       --  Wait forever; this will finish the simulation.
