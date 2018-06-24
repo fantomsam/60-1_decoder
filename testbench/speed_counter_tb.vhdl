@@ -1,12 +1,10 @@
 library ieee;
 use ieee.std_logic_1164.all;
 
---  A testbench has no ports.
 entity speed_counter_tb is
 end speed_counter_tb;
 
 architecture behav of speed_counter_tb is
-   --  Declaration of the component that will be instantiated.
    component speed_counter
      port (
         clk : in std_logic;
@@ -17,15 +15,12 @@ architecture behav of speed_counter_tb is
         period_cnt : out std_logic_vector(13 downto 0) 
        );
    end component;
-
-   --  Specifies which entity is bound with the component.
-   --for adder_0: adder use entity work.adder;
+   
    signal clk, rst, in_60_1, gap_det, low_speed : std_logic;
    signal period_cnt : std_logic_vector(13 downto 0);
    constant clk_in_t : time := 1 us;
-   constant speed_of_motor : time := 10 ms;
+   constant speed_of_motor : time := 200 us;
    begin
-   --  Component instantiation.
    S_c_0: speed_counter
    port map (
               clk => clk,
@@ -35,10 +30,7 @@ architecture behav of speed_counter_tb is
               low_speed => low_speed,
               period_cnt => period_cnt
             );
-
-   --  This process does the real job.
-   -- clock 
-   entrada_process : process
+   entrada_process : process -- clock 
    begin
         clk<= '0';
         wait for clk_in_t / 2;
@@ -66,7 +58,6 @@ architecture behav of speed_counter_tb is
 		  	wait for 20 ms; 
 		  end loop;
       assert false report "end of test" severity note;
-      --  Wait forever; this will finish the simulation.
       wait;
    end process;
 end behav;

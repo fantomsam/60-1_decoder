@@ -4,7 +4,7 @@ use ieee.std_logic_unsigned.all;
 
 entity speed_counter is
   port (
-        clk : in std_logic;
+        clk : in std_logic;--1Mhz clock 
         rst : in std_logic;
         in_60_1 : in std_logic;
         gap_det : out std_logic;
@@ -30,7 +30,7 @@ begin
         low_speed <= '0';
         period_cnt <= (others=>'1');
         n_pulse_cmp <= (others=>'0');
-      elsif (clk' event and clk ='1') then
+      elsif (clk'event and clk ='1') then
         s_in_60_1<=s_in_60_1 sll 1;
         s_in_60_1(0)<=in_60_1;
         if (s_in_60_1="110" and gap_det = '0') then
