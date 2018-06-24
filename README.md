@@ -1,6 +1,6 @@
 
 <p align="center">
-### Decoder for a 60-1 holes Disk encoder made on FPGA<br>
+ <h>Decoder for a 60-1 holes Disk encoder made on FPGA</h><br>
 <img src="/img/output.png">
 </p>
 
